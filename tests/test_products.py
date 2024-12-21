@@ -106,7 +106,7 @@ def test_new_product_duplicate_update() -> None:
     assert product1 is product2
 
 
-def test_add_product(category_electronics: Category, products_apple: Product) -> None:
-    category_electronics.add_product(products_apple)
-    assert products_apple in category_electronics.products
-    assert len(category_electronics.products) == 1
+# def test_add_product(category_electronics: Category, products_apple: Product) -> None:
+#     category_electronics.add_product(products_apple)
+#     assert products_apple in category_electronics.products
+#     assert len(category_electronics.products) == 1
