@@ -108,18 +108,6 @@ class Category:
     @property
     def products(self) -> list:
         """
-        Возвращает список продуктов в категории
-        """
-        return self.__products
-
-    def get_product_count(self) -> int:
-        """
-        Возвращает количество продуктов в категории
-        """
-        return len(self.__products)
-
-    def get_formatted_products(self) -> list:
-        """
         Возвращает список товаров в виде строк в формате:
         "Название продукта, 80 руб. Остаток: 15 шт."
         """
@@ -127,3 +115,9 @@ class Category:
         for product in self.__products:
             formatted_list.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.")
         return formatted_list
+
+    def get_product_count(self) -> int:
+        """
+        Возвращает количество продуктов в категории
+        """
+        return len(self.__products)
