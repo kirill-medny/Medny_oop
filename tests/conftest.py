@@ -13,17 +13,13 @@ def category_phone() -> Category:
     return Category(
         "Смартфоны",
         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        # ["product1", "product2", "product3"],
+        ["product1", "product2", "product3"],
     )
 
 
 @pytest.fixture()
 def category_iphone() -> Category:
-    return Category(
-        "Айфоны",
-        "Айфоны получения дополнительных функций для удобства жизни",
-        # ["product5", "product4"]
-    )
+    return Category("Айфоны", "Айфоны получения дополнительных функций для удобства жизни", ["product5", "product4"])
 
 
 @pytest.fixture()
@@ -31,17 +27,13 @@ def category_phone_none_prod() -> Category:
     return Category(
         "Смартфоны",
         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        # [],
+        [],
     )
 
 
 @pytest.fixture()
 def category_ip() -> Category:
-    return Category(
-        "Айфоны",
-        "Айфоны получения дополнительных функций для удобства жизни",
-        # ["product5", "product4"]
-    )
+    return Category("Айфоны", "Айфоны получения дополнительных функций для удобства жизни", ["product5", "product4"])
 
 
 @pytest.fixture()
@@ -71,4 +63,4 @@ def products_apple() -> Product:
 @pytest.fixture
 def category_electronics() -> Category:
     """Фикстура для создания категории Электроника."""
-    return Category("Электроника", "Товары электроники")
+    return Category("Электроника", "Товары электроники")  # type: ignore

@@ -15,11 +15,7 @@ def load_data_from_json(filepath: str) -> List[Category]:
 
         for category_data in data:
             try:
-                # products = [
-                #     Product(product["name"], product["description"], product["price"], product["quantity"])
-                #     for product in category_data["products"]
-                # ]
-                category = Category(category_data["name"], category_data["description"])
+                category = Category(category_data["name"], category_data["description"])  # type: ignore
                 categories.append(category)
             except (KeyError, TypeError, ValueError) as e:
                 print(f"Ошибка при обработке данных категории: {category_data}, Ошибка: {e}")
