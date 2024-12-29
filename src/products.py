@@ -20,15 +20,15 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self) -> str:
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
     @property
     def price(self) -> float:
         """
         Геттер для приватного атрибута цены.
         """
         return self.__price
-
-    def __str__(self):
-        return f'{self.name}, {self.price} руб. Остаток: {self.quantity} шт.'
 
     @price.setter
     def price(self, new_price: float) -> None:
@@ -75,14 +75,14 @@ class Product:
                 if product.name == name:
                     # Товар с таким именем уже существует, обновляем его
                     product.quantity += quantity
-                    product.price = max(product.price, price)
+                    product.price = max(product.price, price)  # type: ignore
                     return product
         # Товар не существует, создаем новый
         return cls(name, description, price, quantity)
 
-    def __add__(self, other):
+    def __add__(self, other) -> float:  # type: ignore
         """Магический метод для сложения продуктов и возврата полной стоимости."""
-        return (self.price * self.quantity) + (other.price * other.quantity)
+        return (self.price * self.quantity) + (other.price * other.quantity)  # type: ignore
 
 
 class Category:
@@ -95,7 +95,7 @@ class Category:
     _category_count = 0
     # _product_count = 0
 
-    def __init__(self, name: str, description: str, __products:list) -> None:
+    def __init__(self, name: str, description: str, __products: list) -> None:
 
         self.name = name
         self.description = description
@@ -114,9 +114,8 @@ class Category:
             formatted_list.append(f"{str(product)}")
         return formatted_list
 
-
-    def __str__(self):
-        return f'{self.name}, количество продуктов: {len(self.products)} шт.'
+    def __str__(self) -> str:
+        return f"{self.name}, количество продуктов: {len(self.products)} шт."
 
     def add_product(self, product: Product) -> None:
         """
@@ -124,7 +123,6 @@ class Category:
         :param product: объект продукта
         """
         self.__products.append(product)
-
 
     def get_product_count(self) -> int:
         """
