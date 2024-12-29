@@ -3,6 +3,7 @@ from unittest.mock import patch
 import pytest
 
 from src.products import Category, Product
+from tests.conftest import products_samsung
 
 
 def test_init_products(products_samsung: Product) -> None:
@@ -106,7 +107,12 @@ def test_new_product_duplicate_update() -> None:
     assert product1 is product2
 
 
-# def test_add_product(category_electronics: Category, products_apple: Product) -> None:
-#     category_electronics.add_product(products_apple)
-#     assert products_apple in category_electronics.products
-#     assert len(category_electronics.products) == 1
+def test_sum_full_cost(products_apple:Product, products_samsung:Product) -> None:
+    assert products_apple + products_samsung == 1900000
+
+def test_str_product(products_apple:Product) -> None:
+    assert str(products_apple) == "Apple Iphone 14, 100000 руб. Остаток: 10 шт."
+
+def test_str_category(category_iphone:Category) ->None:
+    assert str(category_iphone) == "Айфоны, количество продуктов: 2 шт."
+

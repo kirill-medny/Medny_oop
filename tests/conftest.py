@@ -13,7 +13,7 @@ def category_phone() -> Category:
     return Category(
         "Смартфоны",
         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        # ["product1", "product2", "product3"],
+        ["product1", "product2", "product3"],
     )
 
 
@@ -22,7 +22,7 @@ def category_iphone() -> Category:
     return Category(
         "Айфоны",
         "Айфоны получения дополнительных функций для удобства жизни",
-        # ["product5", "product4"]
+        ["product5", "product4"]
     )
 
 
@@ -31,7 +31,7 @@ def category_phone_none_prod() -> Category:
     return Category(
         "Смартфоны",
         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        # [],
+        [],
     )
 
 
@@ -40,7 +40,7 @@ def category_ip() -> Category:
     return Category(
         "Айфоны",
         "Айфоны получения дополнительных функций для удобства жизни",
-        # ["product5", "product4"]
+        ["product5", "product4"]
     )
 
 

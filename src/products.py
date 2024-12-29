@@ -27,6 +27,9 @@ class Product:
         """
         return self.__price
 
+    def __str__(self):
+        return f'{self.name}, {self.price} руб. Остаток: {self.quantity} шт.'
+
     @price.setter
     def price(self, new_price: float) -> None:
         """
@@ -77,6 +80,10 @@ class Product:
         # Товар не существует, создаем новый
         return cls(name, description, price, quantity)
 
+    def __add__(self, other):
+        """Магический метод для сложения продуктов и возврата полной стоимости."""
+        return (self.price * self.quantity) + (other.price * other.quantity)
+
 
 class Category:
     """Категории продуктов"""
@@ -86,24 +93,15 @@ class Category:
     __products: list  # Список товаров категории
 
     _category_count = 0
-    _product_count = 0
+    # _product_count = 0
 
-    def __init__(self, name: str, description: str) -> None:
+    def __init__(self, name: str, description: str, __products:list) -> None:
 
         self.name = name
         self.description = description
-        self.__products = []
+        self.__products = __products
 
         Category._category_count += 1
-
-    def add_product(self, product: Product) -> None:
-        """
-         Добавляет продукт в категорию
-
-        :param product: объект продукта
-        """
-        self.__products.append(product)
-        Category._product_count += 1
 
     @property
     def products(self) -> list:
@@ -113,8 +111,20 @@ class Category:
         """
         formatted_list = []
         for product in self.__products:
-            formatted_list.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.")
+            formatted_list.append(f"{str(product)}")
         return formatted_list
+
+
+    def __str__(self):
+        return f'{self.name}, количество продуктов: {len(self.products)} шт.'
+
+    def add_product(self, product: Product) -> None:
+        """
+         Добавляет продукт в категорию
+        :param product: объект продукта
+        """
+        self.__products.append(product)
+
 
     def get_product_count(self) -> int:
         """
