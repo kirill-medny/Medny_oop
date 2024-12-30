@@ -114,5 +114,5 @@ def test_str_product(products_apple: Product) -> None:
     assert str(products_apple) == "Apple Iphone 14, 100000 руб. Остаток: 10 шт."
 
 
-def test_str_category(category_iphone: Category) -> None:
-    assert str(category_iphone) == "Айфоны, количество продуктов: 2 шт."
+def test_str_category(category_phone: Category) -> None:
+    assert str(category_phone) == "Смартфоны, количество продуктов: 27 шт."
