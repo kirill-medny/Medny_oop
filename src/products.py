@@ -93,7 +93,6 @@ class Category:
     __products: list  # Список товаров категории
 
     _category_count = 0
-    # _product_count = 0
 
     def __init__(self, name: str, description: str, __products: list) -> None:
 
@@ -115,7 +114,8 @@ class Category:
         return formatted_list
 
     def __str__(self) -> str:
-        return f"{self.name}, количество продуктов: {len(self.products)} шт."
+        total_quantity = sum(product.quantity for product in self.__products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
 
     def add_product(self, product: Product) -> None:
         """
