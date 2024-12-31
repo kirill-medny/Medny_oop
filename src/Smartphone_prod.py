@@ -10,6 +10,11 @@ class Smartphone(Product):
         self.memory=memory
         self.color=color
 
+    def __add__(self, other) -> float:  # type: ignore
+        """Магический метод для сложения продуктов категории смартфоны и возврата полной стоимости."""
+        if type(other) is Smartphone:
+            return (self.price * self.quantity) + (other.price * other.quantity)  # type: ignore
+        raise TypeError
 
 
 
