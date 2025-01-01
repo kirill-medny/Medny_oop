@@ -126,7 +126,6 @@ class Category:
             return self.__products.append(product)
         raise TypeError
 
-
     def get_product_count(self) -> int:
         """
         Возвращает количество продуктов в категории

@@ -1,8 +1,5 @@
-from unittest.mock import patch
-
-import pytest
-
 from src.lawn_grass_prod import LawnGrass
+
 
 def test_init_lawngrass_grass(lawngrass_grass: LawnGrass) -> None:
     assert lawngrass_grass.name == "Газонная трава"
@@ -12,4 +9,3 @@ def test_init_lawngrass_grass(lawngrass_grass: LawnGrass) -> None:
     assert lawngrass_grass.country == "Россия"
     assert lawngrass_grass.germination_period == "7 дней"
     assert lawngrass_grass.color == "Зеленый"
-
