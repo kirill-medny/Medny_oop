@@ -1,7 +1,8 @@
 from typing import Any, Dict, List, Optional, Type
+from base_product import BaseProduct
 
 
-class Product:
+class Product(BaseProduct):
     """Класс продукты"""
 
     name: str  # Название
