@@ -1,5 +1,6 @@
 from src.products import Category, Product
-
+from src.Smartphone_prod import Smartphone
+from src.LawnGrass_prod import LawnGrass
 
 if __name__ == '__main__':
     smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
@@ -73,7 +74,7 @@ if __name__ == '__main__':
 
     print(category_smartphones.products)
 
-    print(Category.product_count)
+    print(Category.get_product_count)
 
     try:
         category_smartphones.add_product("Not a product")

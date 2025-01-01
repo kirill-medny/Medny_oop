@@ -122,7 +122,10 @@ class Category:
          Добавляет продукт в категорию
         :param product: объект продукта
         """
-        self.__products.append(product)
+        if isinstance(product, Product):
+            return self.__products.append(product)
+        raise TypeError
+
 
     def get_product_count(self) -> int:
         """
