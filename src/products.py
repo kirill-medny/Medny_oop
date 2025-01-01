@@ -1,8 +1,9 @@
 from typing import Any, Dict, List, Optional, Type
-from base_product import BaseProduct
+from src.base_product import BaseProduct
+from src.print_mixin import PrintMixin
 
 
-class Product(BaseProduct):
+class Product(BaseProduct, PrintMixin):
     """Класс продукты"""
 
     name: str  # Название
@@ -20,6 +21,7 @@ class Product(BaseProduct):
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self) -> str:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."

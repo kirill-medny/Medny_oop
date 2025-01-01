@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-
 class BaseProduct(ABC):
 
 
@@ -8,10 +7,10 @@ class BaseProduct(ABC):
     def __add__(self, other) -> float:
         pass
 
-    @classmethod
-    @abstractmethod
-    def new_product(cls):
-        pass
+    # @classmethod
+    # @abstractmethod
+    # def new_product(cls):
+    #     pass
 
 
 
