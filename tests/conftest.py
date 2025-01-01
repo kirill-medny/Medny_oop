@@ -1,6 +1,8 @@
 import pytest
 
+from src.lawn_grass_prod import LawnGrass
 from src.products import Category, Product
+from src.smartphone_prod import Smartphone
 
 
 @pytest.fixture()
@@ -68,6 +70,18 @@ def products_apple() -> Product:
 def category_electronics() -> Category:
     """Фикстура для создания категории Электроника."""
     return Category("Электроника", "Товары электроники")  # type: ignore
+
+@pytest.fixture
+def smartphone_samsung() -> Smartphone:
+    """Фикстура для проверки категории Smartphone"""
+    return Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера",
+                             180000.0, 5, 95.5,
+                         "S23 Ultra", 256, "Серый")
+
+@pytest.fixture
+def lawngrass_grass() -> LawnGrass:
+    """Фикстура для проверки категории LawnGrass"""
+    return LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
 
 
 
