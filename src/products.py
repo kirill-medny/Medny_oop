@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Optional, Type
 from src.base_product import BaseProduct
 from src.print_mixin import PrintMixin
+from src.base_item import BaseItem
 
 
 class Product(BaseProduct, PrintMixin):
@@ -88,19 +89,21 @@ class Product(BaseProduct, PrintMixin):
         return (self.price * self.quantity) + (other.price * other.quantity)  # type: ignore
 
 
-class Category:
+class Category(BaseItem):
     """Категории продуктов"""
 
-    name: str  # Название
-    description: str  # Описание
+    # name: str  # Название
+    # description: str  # Описание
     __products: list  # Список товаров категории
 
     _category_count = 0
 
     def __init__(self, name: str, description: str, __products: list) -> None:
 
-        self.name = name
-        self.description = description
+
+        # self.name = name
+        # self.description = description
+        super().__init__(name, description)
         self.__products = __products
 
         Category._category_count += 1

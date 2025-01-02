@@ -7,10 +7,7 @@ class BaseProduct(ABC):
     def __add__(self, other) -> float:
         pass
 
-    # @classmethod
-    # @abstractmethod
-    # def new_product(cls):
-    #     pass
+
 
 
 
