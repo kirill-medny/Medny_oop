@@ -1,7 +1,11 @@
 from typing import Any, Dict, List, Optional, Type
 
+from src.base_item import BaseItem
+from src.base_product import BaseProduct
+from src.print_mixin import PrintMixin
 
-class Product:
+
+class Product(BaseProduct, PrintMixin):
     """Класс продукты"""
 
     name: str  # Название
@@ -19,6 +23,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self) -> str:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
@@ -85,19 +90,20 @@ class Product:
         return (self.price * self.quantity) + (other.price * other.quantity)  # type: ignore
 
 
-class Category:
+class Category(BaseItem):
     """Категории продуктов"""
 
-    name: str  # Название
-    description: str  # Описание
+    # name: str  # Название
+    # description: str  # Описание
     __products: list  # Список товаров категории
 
     _category_count = 0
 
     def __init__(self, name: str, description: str, __products: list) -> None:
 
-        self.name = name
-        self.description = description
+        # self.name = name
+        # self.description = description
+        super().__init__(name, description)
         self.__products = __products
 
         Category._category_count += 1
