@@ -1,7 +1,8 @@
 from typing import Any, Dict, List, Optional, Type
+
+from src.base_item import BaseItem
 from src.base_product import BaseProduct
 from src.print_mixin import PrintMixin
-from src.base_item import BaseItem
 
 
 class Product(BaseProduct, PrintMixin):
@@ -99,7 +100,6 @@ class Category(BaseItem):
     _category_count = 0
 
     def __init__(self, name: str, description: str, __products: list) -> None:
-
 
         # self.name = name
         # self.description = description

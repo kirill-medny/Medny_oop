@@ -1,4 +1,4 @@
-from base_item import BaseItem
+from base_item import BaseItem  # type: ignore
 from src.products import Product
 
 

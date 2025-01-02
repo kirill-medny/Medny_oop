@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 
+
 class BaseItem(ABC):
     """Абстрактный класс для общих свойств Category и Order"""
+
     name: str
     description: str
 
