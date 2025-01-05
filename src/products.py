@@ -15,9 +15,9 @@ class Product(BaseProduct, PrintMixin):
 
     def __init__(self, name: str, description: str, price: float = 0, quantity: int = 0) -> None:
         if price < 0:
-            raise ValueError("Price cannot be negative")
-        if quantity < 0:
-            raise ValueError("Quantity cannot be negative")
+            raise ValueError("Цена не должна быть отрицательной")
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
 
         self.name = name
         self.description = description
@@ -137,3 +137,19 @@ class Category(BaseItem):
         Возвращает количество продуктов в категории
         """
         return len(self.__products)
+
+    def get_average_price(self) -> float:
+        """
+        Подсчитывает средний ценник всех товаров в категории.
+
+        Обрабатывает случай, когда в категории нет товаров
+        или сумма цен всех товаров равна нулю.
+        В таком случае возвращает 0.
+        """
+        if not self.__products:
+            return 0
+        try:
+             total_price = sum(product.price for product in self.__products)
+             return total_price / len(self.__products)
+        except ZeroDivisionError:
+            return 0

@@ -116,3 +116,18 @@ def test_str_product(products_apple: Product) -> None:
 
 def test_str_category(category_phone: Category) -> None:
     assert str(category_phone) == "Смартфоны, количество продуктов: 27 шт."
+
+
+def test_create_product_with_zero_quantity() -> None:
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен"):
+        Product("Test Product", "Test description", 100, 0)
+
+
+def test_get_average_price(category_smartphones: Category) -> None:
+    average_price = category_smartphones.get_average_price()
+    assert average_price == 140333.33333333334
+
+
+def test_get_average_price_empty_category(empty_category: Category) -> None:
+    average_price = empty_category.get_average_price()
+    assert average_price == 0
