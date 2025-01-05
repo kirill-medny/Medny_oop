@@ -3,6 +3,7 @@ import pytest
 from src.lawn_grass_prod import LawnGrass
 from src.products import Category, Product
 from src.smartphone_prod import Smartphone
+from src.order import Order
 
 @pytest.fixture
 def products_samsung() -> Product:
@@ -110,3 +111,7 @@ def category_smartphones(products_samsung: Product, products_iphone: Product, pr
 @pytest.fixture
 def empty_category() -> Category:
     return Category("Пустая категория", "Описание пустой категории", [])
+
+@pytest.fixture
+def order_samsung(products_samsung: Product) -> Order:
+    return Order(products_samsung, 2)
