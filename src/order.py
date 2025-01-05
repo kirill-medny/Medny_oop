@@ -1,5 +1,6 @@
-from base_item import BaseItem  # type: ignore
+from src.base_item import BaseItem
 from src.products import Product
+from src.exceptions import ZeroQuantityError
 
 
 class Order(BaseItem):
@@ -11,8 +12,7 @@ class Order(BaseItem):
     def __init__(self, product: Product, quantity: int) -> None:
         super().__init__(product.name, product.description)
         if quantity <= 0:
-            raise ValueError("Quantity must be positive.")
-
+            raise ZeroQuantityError()
         self.product = product
         self.quantity = quantity
 

@@ -3,6 +3,8 @@ from unittest.mock import patch
 import pytest
 
 from src.products import Category, Product
+from src.order import Order
+from src.exceptions import ZeroQuantityError
 
 
 def test_init_products(products_samsung: Product) -> None:
@@ -41,9 +43,9 @@ def test_category_creation_with_no_products(category_phone_none_prod: Category) 
     assert category_phone_none_prod.products == []
 
 
-def test_init_products_none_price(products_none_price: Product) -> None:
-    assert products_none_price.price == 0
-    assert products_none_price.quantity == 0
+# def test_init_products_none_price(products_none_price: Product) -> None:
+#     assert products_none_price.price == 0
+#     assert products_none_price.quantity == 0
 
 
 def test_create_product_negative_price() -> None:
@@ -67,14 +69,14 @@ def test_invalid_quantity_products_type() -> None:
         Category("Name", "Description", 123)  # type: ignore
 
 
-def test_negative_price() -> None:
-    with pytest.raises(ValueError):
-        Product("Name", "Description", -10.99, 5)
+def test_create_product_with_negative_quantity() -> None:
+    with pytest.raises(ValueError, match="Количество не должно быть отрицательным"):
+        Product("Test Product", "Test description", 100, -1)
 
 
-def test_negative_quantity() -> None:
-    with pytest.raises(ValueError):
-        Product("Name", "Description", 10.99, -5)
+def test_create_product_with_negative_price() -> None:
+    with pytest.raises(ValueError, match="Цена не должна быть отрицательной"):
+        Product("Test Product", "Test description", -100, 5)
 
 
 def test_set_lower_price_with_confirm(products_samsung: Product) -> None:
@@ -116,3 +118,26 @@ def test_str_product(products_apple: Product) -> None:
 
 def test_str_category(category_phone: Category) -> None:
     assert str(category_phone) == "Смартфоны, количество продуктов: 27 шт."
+
+
+def test_create_product_with_zero_quantity() -> None:
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен"):
+        Product("Test Product", "Test description", 100, 0)
+
+
+def test_get_average_price(category_smartphones: Category) -> None:
+    average_price = category_smartphones.get_average_price()
+    assert average_price == 140333.33333333334
+
+
+def test_get_average_price_empty_category(empty_category: Category) -> None:
+    average_price = empty_category.get_average_price()
+    assert average_price == 0
+
+
+def test_add_product_to_category(products_xiaomi: Product, category_smartphones: Category, capsys) -> None:
+    category_smartphones.add_product(products_xiaomi)
+    assert category_smartphones.get_product_count() == 4
+    captured = capsys.readouterr()
+    assert "Товар Xiaomi Redmi Note 11 добавлен в категорию Смартфоны" in captured.out
+    assert "Обработка добавления товара в категорию Смартфоны завершена." in captured.out

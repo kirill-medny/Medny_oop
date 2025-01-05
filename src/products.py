@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Optional, Type
 from src.base_item import BaseItem
 from src.base_product import BaseProduct
 from src.print_mixin import PrintMixin
+from src.exceptions import ZeroQuantityError
 
 
 class Product(BaseProduct, PrintMixin):
@@ -15,9 +16,11 @@ class Product(BaseProduct, PrintMixin):
 
     def __init__(self, name: str, description: str, price: float = 0, quantity: int = 0) -> None:
         if price < 0:
-            raise ValueError("Price cannot be negative")
+            raise ValueError("Цена не должна быть отрицательной")
         if quantity < 0:
-            raise ValueError("Quantity cannot be negative")
+            raise ValueError("Количество не должно быть отрицательным")
+        if quantity == 0:
+            raise ZeroQuantityError()
 
         self.name = name
         self.description = description
@@ -128,12 +131,44 @@ class Category(BaseItem):
          Добавляет продукт в категорию
         :param product: объект продукта
         """
-        if isinstance(product, Product):
-            return self.__products.append(product)
-        raise TypeError
+        # if isinstance(product, Product):
+        #     return self.__products.append(product)
+        # raise TypeError
+        try:
+            if isinstance(product, Product):
+                if product.quantity == 0:
+                    raise ZeroQuantityError()
+                self.__products.append(product)
+                print(f"Товар {product.name} добавлен в категорию {self.name}.")
+            else:
+                raise TypeError("Неверный тип товара для добавления.")
+        except ZeroQuantityError as e:
+            print(f"Ошибка добавления товара в категорию {self.name}: {e}")
+            raise
+        except TypeError as e:
+            print(f"Ошибка добавления товара в категорию {self.name}: {e}")
+            raise
+        finally:
+            print(f"Обработка добавления товара в категорию {self.name} завершена.")
 
     def get_product_count(self) -> int:
         """
         Возвращает количество продуктов в категории
         """
         return len(self.__products)
+
+    def get_average_price(self) -> float:
+        """
+        Подсчитывает средний ценник всех товаров в категории.
+
+        Обрабатывает случай, когда в категории нет товаров
+        или сумма цен всех товаров равна нулю.
+        В таком случае возвращает 0.
+        """
+        if not self.__products:
+            return 0
+        try:
+             total_price = sum(product.price for product in self.__products)
+             return total_price / len(self.__products)
+        except ZeroDivisionError:
+            return 0
