@@ -1,10 +1,9 @@
 from unittest.mock import patch
 
 import pytest
+from pytest import CaptureFixture
 
 from src.products import Category, Product
-from src.order import Order
-from src.exceptions import ZeroQuantityError
 
 
 def test_init_products(products_samsung: Product) -> None:
@@ -135,7 +134,8 @@ def test_get_average_price_empty_category(empty_category: Category) -> None:
     assert average_price == 0
 
 
-def test_add_product_to_category(products_xiaomi: Product, category_smartphones: Category, capsys) -> None:
+def test_add_product_to_category(products_xiaomi: Product, category_smartphones: Category,
+                                 capsys: CaptureFixture[str]) -> None:
     category_smartphones.add_product(products_xiaomi)
     assert category_smartphones.get_product_count() == 4
     captured = capsys.readouterr()
