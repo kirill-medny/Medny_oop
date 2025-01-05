@@ -21,8 +21,8 @@ def test_lawn_grass_prod(capsys: CaptureFixture[str]) -> None:
 
 def test_smartphone_prod(capsys: CaptureFixture[str]) -> None:
     Smartphone(
-        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5,
-        95.5, "S23 Ultra", 256, "Серый"
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0,
+        5, 95.5, "S23 Ultra", 256, "Серый"
     )
     massage = capsys.readouterr()
     assert massage.out.strip() == "Smartphone(Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, 5)"

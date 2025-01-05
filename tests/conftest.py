@@ -1,13 +1,15 @@
 import pytest
 
 from src.lawn_grass_prod import LawnGrass
+from src.order import Order
 from src.products import Category, Product
 from src.smartphone_prod import Smartphone
-from src.order import Order
+
 
 @pytest.fixture
 def products_samsung() -> Product:
-    return Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000, 5)
+    return Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера",
+                   180000, 5)
 
 
 @pytest.fixture
@@ -19,6 +21,7 @@ def products_iphone() -> Product:
 def products_xiaomi() -> Product:
     return Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000, 14)
 
+
 @pytest.fixture()
 def category_phone() -> Category:
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера",
@@ -28,7 +31,7 @@ def category_phone() -> Category:
 
     return Category(
         "Смартфоны",
-        "Смартфоны, как средство не только коммуникации, " 
+        "Смартфоны, как средство не только коммуникации, "
         "но и получения дополнительных функций для удобства жизни",
         [product1, product2, product3],
     )
@@ -44,7 +47,7 @@ def category_iphone() -> Category:
 def category_phone_none_prod() -> Category:
     return Category(
         "Смартфоны",
-        "Смартфоны, как средство не только коммуникации, " 
+        "Смартфоны, как средство не только коммуникации, "
         "но и получения дополнительных функций для удобства жизни",
         [],
     )
@@ -101,16 +104,21 @@ def lawngrass_grass() -> LawnGrass:
     return LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20,
                      "Россия", "7 дней", "Зеленый")
 
+
 @pytest.fixture
 def category_smartphones(products_samsung: Product, products_iphone: Product, products_xiaomi: Product) -> Category:
     return Category(
         "Смартфоны",
-        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+        "Смартфоны, как средство не только коммуникации,"
+        " но и получения дополнительных функций для удобства жизни",
         [products_samsung, products_iphone, products_xiaomi],
     )
+
+
 @pytest.fixture
 def empty_category() -> Category:
     return Category("Пустая категория", "Описание пустой категории", [])
+
 
 @pytest.fixture
 def order_samsung(products_samsung: Product) -> Order:
